@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../ui/utils.dart';
+
 class Feed extends StatefulWidget {
   const Feed({Key? key}) : super(key: key);
 
@@ -7,35 +8,40 @@ class Feed extends StatefulWidget {
   _FeedState createState() => _FeedState();
 }
 
-
 final List<Map> articles = [
   {
-    "title": "KUKA OIL AND GAS In celebration of the Montreal Protocol that played an important role in decreasing the adverse effects",
+    "title":
+        "KUKA OIL AND GAS In celebration of the Montreal Protocol that played an important role in decreasing the adverse effects",
     "author": "Post",
     "time": "4 min read",
   },
   {
-    "title": "Google LLC The phaseout of controlled uses of ozone depleting substances and the related reductions have not only helped protect the ",
-    "author": "Post",
-    "time": "3 min read",
-  },
- {
-    "title": "KUKA OIL AND GAS In celebration of the Montreal Protocol that played an important role in decreasing the adverse effects",
-    "author": "Post",
-    "time": "4 min read",
-  },
-  {
-    "title": "Google LLC The phaseout of controlled uses of ozone depleting substances and the related reductions have not only helped protect the ",
+    "title":
+        "Google LLC The phaseout of controlled uses of ozone depleting substances and the related reductions have not only helped protect the ",
     "author": "Post",
     "time": "3 min read",
   },
   {
-    "title": "KUKA OIL AND GAS In celebration of the Montreal Protocol that played an important role in decreasing the adverse effects",
+    "title":
+        "KUKA OIL AND GAS In celebration of the Montreal Protocol that played an important role in decreasing the adverse effects",
     "author": "Post",
     "time": "4 min read",
   },
   {
-    "title": "Google LLC The phaseout of controlled uses of ozone depleting substances and the related reductions have not only helped protect the ",
+    "title":
+        "Google LLC The phaseout of controlled uses of ozone depleting substances and the related reductions have not only helped protect the ",
+    "author": "Post",
+    "time": "3 min read",
+  },
+  {
+    "title":
+        "KUKA OIL AND GAS In celebration of the Montreal Protocol that played an important role in decreasing the adverse effects",
+    "author": "Post",
+    "time": "4 min read",
+  },
+  {
+    "title":
+        "Google LLC The phaseout of controlled uses of ozone depleting substances and the related reductions have not only helped protect the ",
     "author": "Post",
     "time": "3 min read",
   },
@@ -46,10 +52,9 @@ final List<Map> articles = [
   },
 ];
 
-
 class _FeedState extends State<Feed> {
   var greenieTheme = new GreenieTheme();
-  
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -61,10 +66,10 @@ class _FeedState extends State<Feed> {
           appBarTheme: AppBarTheme(
             color: Colors.white,
             toolbarTextStyle: TextStyle(
-                color: greenieTheme.secondaryColor,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-              ),
+              color: greenieTheme.secondaryColor,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+            ),
             iconTheme: IconThemeData(color: greenieTheme.secondaryColor),
             actionsIconTheme: IconThemeData(
               color: greenieTheme.secondaryColor,
@@ -72,90 +77,98 @@ class _FeedState extends State<Feed> {
           ),
         ),
         child: Scaffold(
-          backgroundColor: Theme.of(context).buttonColor,
+          backgroundColor: Colors.white,
           appBar: AppBar(
+            backgroundColor: greenieTheme.primaryColor,
             centerTitle: true,
-            title: Text('Feed'),
-            leading: Icon(Icons.category),
+            title: Text(
+              'FEEDS',
+              style: TextStyle(fontFamily: greenieTheme.fontFamily),
+            ),
             actions: <Widget>[
               IconButton(
                 icon: Icon(Icons.search),
                 onPressed: () {},
               )
             ],
-            bottom: TabBar(
-              isScrollable: true,
-              labelColor: greenieTheme.primaryColor,
-              indicatorColor: greenieTheme.primaryColor,
-              unselectedLabelColor: greenieTheme.secondaryColor,
-              tabs: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("For You"),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("Design"),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("Beauty"),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("Education"),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("Entertainment"),
-                ),
-              ],
+          ),
+          body: SingleChildScrollView(
+            child: Column(
+              children: [_buildFeed(0), Divider(), _buildFeed(0)],
             ),
           ),
-          body: TabBarView(
-            children: <Widget>[
-              ListView.separated(
-                padding: const EdgeInsets.all(16.0),
-                itemCount: articles.length,
-                itemBuilder: (context, index) {
-                  return _buildArticleItem(index);
-                },
-                separatorBuilder: (context, index) =>
-                    const SizedBox(height: 16.0),
-              ),
-              Container(
-                child: Text("Tab 2"),
-              ),
-              Container(
-                child: Text("Tab 3"),
-              ),
-              Container(
-                child: Text("Tab 4"),
-              ),
-              Container(
-                child: Text("Tab 5"),
-              ),
-            ],
-          ),
-
           bottomNavigationBar: NavBar(),
         ),
       ),
     );
   }
 
-
-  Widget _buildArticleItem(int index) {
-    Map article = articles[index];
-    final String sample = 'assets/';
+  Widget _buildFeed(int index) {
     return Container(
+      margin: EdgeInsets.all(10),
+      padding: EdgeInsets.all(5),
+      decoration: BoxDecoration(
+        border: Border.all(width: 0.5,color: Colors.grey),
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(10))),
+      width: double.infinity,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Title',
+            style: TextStyle(
+                fontFamily: greenieTheme.fontFamily,
+                fontSize: 20,
+                color: greenieTheme.primaryColor),
+          ),
+          Text(
+            'Lorem Ipsum fnejfbaiufid nfdjnfiuadnf dfuidhafid fdfuidahfuiadfn buifidhfiuawdhf ffuhf',
+            textAlign: TextAlign.justify,
+            style: TextStyle(
+              color: Colors.black,
+              fontFamily: greenieTheme.fontFamily,
+              fontWeight: FontWeight.w300,
+              fontSize: 18.0,
+            ),
+          ),
+          SizedBox(child: Image.asset('assets/images.jpg')),
+          Container(
+            height: 50,
+            decoration: BoxDecoration(
+                color: greenieTheme.primaryColor,
+                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10),bottomRight: Radius.circular(10)),),
+            child: Row(children: [
+              Expanded(
+                child: Icon(Icons.thumb_up, color: greenieTheme.bgColor),
+              ),
+              Expanded(
+                child: Icon(Icons.thumb_up, color: greenieTheme.bgColor),
+              ),
+            ]),
+          ),
+        ],
+      ),
+    );
+  }
+/*
+  Widget _buildFeedBlock(int index) {
+    Map article = articles[index];
+    final String sample = 'assets/icons/feeds';
+    return Container(
+      margin: EdgeInsets.all(10),
+      padding: EdgeInsets.all(5),
+      decoration:
+          BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10))),
+      height: 500,
+      width: double.infinity,
       color: Colors.white,
       child: Stack(
         children: <Widget>[
           Container(
             width: 90,
             height: 90,
-            color:greenieTheme.bgColor,
+            color: greenieTheme.bgColor,
           ),
           Container(
             color: Colors.white,
@@ -220,4 +233,6 @@ class _FeedState extends State<Feed> {
       ),
     );
   }
+}
+*/
 }

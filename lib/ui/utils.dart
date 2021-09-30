@@ -4,7 +4,7 @@ class GreenieTheme{
   final primaryColor = Color(0xff088A3F);
   final secondaryColor = Color(0xffE5E5E5);
   final bgColor = Colors.white;
-
+  var fontFamily = 'OpenSans';
 }
 
 
