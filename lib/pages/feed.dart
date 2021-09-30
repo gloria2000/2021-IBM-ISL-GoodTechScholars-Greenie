@@ -14,6 +14,8 @@ class _FeedState extends State<Feed> {
   final firestore = FirebaseFirestore.instance;
 
   final postController = TextEditingController();
+    final titleController = TextEditingController();
+
 
   @override
   void initState() {}
@@ -63,18 +65,67 @@ class _FeedState extends State<Feed> {
     return StreamBuilder<QuerySnapshot>(
         stream: firestore.collection('content').snapshots(),
         builder: (context, snapshot) {
-          if(snapshot.hasData){
-             final data = snapshot.requireData;
-          return ListView.builder(
-              itemCount: data.docs.length,
-              itemBuilder: (context, index) {
-                Map<String,dynamic> x = data.docs[index].data() as Map<String,dynamic>;
-                return Text(x['para'],style: TextStyle(color: Colors.black),);
-              });
-              }
-              else{return Text('error');}
+          if (snapshot.hasData) {
+            final data = snapshot.requireData;
+            return ListView.builder(
+                itemCount: data.docs.length,
+                itemBuilder: (context, index) {
+                  Map<String, dynamic> x =
+                      data.docs[index].data() as Map<String, dynamic>;
+                  return Container(
+                      margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10),
+                      
+                      decoration: BoxDecoration(
+                          color: greenieTheme.bgColor,
+                          border: Border.all(width: 0.5, color: Colors.grey),
+                          borderRadius: BorderRadius.all(Radius.circular(5))),
+                      child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            x['title'],
+                            style: TextStyle(
+                                color: greenieTheme.primaryColor,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 20,
+                                fontFamily: greenieTheme.fontFamily),
+                          ),
+                          Text(
+                            x['para'],
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: greenieTheme.fontFamily),
+                          ),
+                          Image.asset('assets/images.jpg'),
+                           Container(
+            height: 50,
+            decoration: BoxDecoration(
+              color: greenieTheme.primaryColor,
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10)),
+            ),
+            child: Row(children: [
+              Expanded(
+                child: InkWell(
+                  child: Image.asset('assets/icons/heart.png'),
+                ),
+              ),
+              Expanded(
+                child: InkWell(
+                  child: Image.asset('assets/icons/share.png'),
+                ),
+              ),
+            ]),
+          ),
+                        ],
+                      ));
+                });
+          } else {
+            return Text('error');
+          }
         });
-    
   }
 
   Widget _postWidget() {
@@ -90,9 +141,16 @@ class _FeedState extends State<Feed> {
               Expanded(
                 child: Container(
                     height: 100,
-                    child: TextField(
-                      controller: postController,
-                      decoration: InputDecoration(hintText: 'Write a post..'),
+                    child: Column(
+                      children: [
+                        TextField(
+                          controller: titleController,
+                          decoration: InputDecoration(hintText: 'Title'),
+                        ),TextField(
+                          controller: postController,
+                          decoration: InputDecoration(hintText: 'Write a post..'),
+                        ),
+                      ],
                     )),
                 flex: 3,
               ),
@@ -105,7 +163,9 @@ class _FeedState extends State<Feed> {
                       firestore
                           .collection('content')
                           .doc()
-                          .set({'title': 'dnjfd', 'para': postController.text});
+                          .set({'title': titleController.text, 'para': postController.text});
+                      postController.clear();
+                      titleController.clear();
                     },
                   ),
                 ),
