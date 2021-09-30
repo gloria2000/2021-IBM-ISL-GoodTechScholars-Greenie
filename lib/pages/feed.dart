@@ -1,156 +1,161 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../ui/utils.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class Feed extends StatefulWidget {
-  const Feed({Key? key}) : super(key: key);
-
   @override
   _FeedState createState() => _FeedState();
 }
 
-final List<Map> articles = [
-  {
-    "title":
-        "KUKA OIL AND GAS In celebration of the Montreal Protocol that played an important role in decreasing the adverse effects",
-    "author": "Post",
-    "time": "4 min read",
-  },
-  {
-    "title":
-        "Google LLC The phaseout of controlled uses of ozone depleting substances and the related reductions have not only helped protect the ",
-    "author": "Post",
-    "time": "3 min read",
-  },
-  {
-    "title":
-        "KUKA OIL AND GAS In celebration of the Montreal Protocol that played an important role in decreasing the adverse effects",
-    "author": "Post",
-    "time": "4 min read",
-  },
-  {
-    "title":
-        "Google LLC The phaseout of controlled uses of ozone depleting substances and the related reductions have not only helped protect the ",
-    "author": "Post",
-    "time": "3 min read",
-  },
-  {
-    "title":
-        "KUKA OIL AND GAS In celebration of the Montreal Protocol that played an important role in decreasing the adverse effects",
-    "author": "Post",
-    "time": "4 min read",
-  },
-  {
-    "title":
-        "Google LLC The phaseout of controlled uses of ozone depleting substances and the related reductions have not only helped protect the ",
-    "author": "Post",
-    "time": "3 min read",
-  },
-  {
-    "title": "How to Seem Like You Always Have Your Shot Together",
-    "author": "Jonhy Vino",
-    "time": "4 min read",
-  },
-];
-
 class _FeedState extends State<Feed> {
   var greenieTheme = new GreenieTheme();
+  final firestore = FirebaseFirestore.instance;
+
+  final postController = TextEditingController();
 
   @override
+  void initState() {}
+  @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      initialIndex: 0,
-      length: 5,
-      child: Theme(
-        data: ThemeData(
-          primaryColor: greenieTheme.primaryColor,
-          appBarTheme: AppBarTheme(
-            color: Colors.white,
-            toolbarTextStyle: TextStyle(
-              color: greenieTheme.secondaryColor,
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold,
-            ),
-            iconTheme: IconThemeData(color: greenieTheme.secondaryColor),
-            actionsIconTheme: IconThemeData(
-              color: greenieTheme.secondaryColor,
-            ),
+    return Theme(
+      data: ThemeData(
+        primaryColor: greenieTheme.primaryColor,
+        appBarTheme: AppBarTheme(
+          color: Colors.white,
+          toolbarTextStyle: TextStyle(
+            color: greenieTheme.secondaryColor,
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+          ),
+          iconTheme: IconThemeData(color: greenieTheme.secondaryColor),
+          actionsIconTheme: IconThemeData(
+            color: greenieTheme.secondaryColor,
           ),
         ),
-        child: Scaffold(
-          backgroundColor: Colors.white,
-          appBar: AppBar(
-            backgroundColor: greenieTheme.primaryColor,
-            centerTitle: true,
-            title: Text(
-              'FEEDS',
-              style: TextStyle(fontFamily: greenieTheme.fontFamily),
-            ),
-            actions: <Widget>[
-              IconButton(
-                icon: Icon(Icons.search),
-                onPressed: () {},
-              )
-            ],
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          backgroundColor: greenieTheme.primaryColor,
+          centerTitle: true,
+          title: Text(
+            'FEEDS',
+            style: TextStyle(fontFamily: greenieTheme.fontFamily),
           ),
-          body: SingleChildScrollView(
-            child: Column(
-              children: [_buildFeed(0), Divider(), _buildFeed(0)],
-            ),
-          ),
-          bottomNavigationBar: NavBar(),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {},
+            )
+          ],
         ),
+        body: Column(
+          children: [_postWidget(), Expanded(child: _buildFeed())],
+        ),
+        bottomNavigationBar: NavBar(),
       ),
     );
   }
 
-  Widget _buildFeed(int index) {
+  Widget _buildFeed() {
+    return StreamBuilder<QuerySnapshot>(
+        stream: firestore.collection('content').snapshots(),
+        builder: (context, snapshot) {
+          if(snapshot.hasData){
+             final data = snapshot.requireData;
+          return ListView.builder(
+              itemCount: data.docs.length,
+              itemBuilder: (context, index) {
+                Map<String,dynamic> x = data.docs[index].data() as Map<String,dynamic>;
+                return Text(x['para'],style: TextStyle(color: Colors.black),);
+              });
+              }
+              else{return Text('error');}
+        });
+    
+  }
+
+  Widget _postWidget() {
     return Container(
+      width: double.infinity,
       margin: EdgeInsets.all(10),
       padding: EdgeInsets.all(5),
-      decoration: BoxDecoration(
-        border: Border.all(width: 0.5,color: Colors.grey),
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(10))),
-      width: double.infinity,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Title',
-            style: TextStyle(
-                fontFamily: greenieTheme.fontFamily,
-                fontSize: 20,
-                color: greenieTheme.primaryColor),
-          ),
-          Text(
-            'Lorem Ipsum fnejfbaiufid nfdjnfiuadnf dfuidhafid fdfuidahfuiadfn buifidhfiuawdhf ffuhf',
-            textAlign: TextAlign.justify,
-            style: TextStyle(
-              color: Colors.black,
-              fontFamily: greenieTheme.fontFamily,
-              fontWeight: FontWeight.w300,
-              fontSize: 18.0,
-            ),
-          ),
-          SizedBox(child: Image.asset('assets/images.jpg')),
-          Container(
-            height: 50,
-            decoration: BoxDecoration(
-                color: greenieTheme.primaryColor,
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10),bottomRight: Radius.circular(10)),),
-            child: Row(children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
               Expanded(
-                child: Icon(Icons.thumb_up, color: greenieTheme.bgColor),
+                child: Container(
+                    height: 100,
+                    child: TextField(
+                      controller: postController,
+                      decoration: InputDecoration(hintText: 'Write a post..'),
+                    )),
+                flex: 3,
               ),
               Expanded(
-                child: Icon(Icons.thumb_up, color: greenieTheme.bgColor),
-              ),
-            ]),
+                flex: 1,
+                child: Container(
+                  child: ElevatedButton(
+                    child: Text('POST'),
+                    onPressed: () {
+                      firestore
+                          .collection('content')
+                          .doc()
+                          .set({'title': 'dnjfd', 'para': postController.text});
+                    },
+                  ),
+                ),
+              )
+            ],
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                  padding: EdgeInsets.all(5),
+                  child: Text(
+                    'Media',
+                    style: TextStyle(
+                        color: greenieTheme.bgColor,
+                        fontFamily: greenieTheme.fontFamily),
+                  ),
+                  decoration: BoxDecoration(
+                    color: greenieTheme.primaryColor,
+                  )),
+              Container(
+                  padding: EdgeInsets.all(5),
+                  child: Text(
+                    'Tag post',
+                    style: TextStyle(
+                      color: greenieTheme.bgColor,
+                      fontFamily: greenieTheme.fontFamily,
+                    ),
+                  ),
+                  decoration: BoxDecoration(
+                    color: greenieTheme.primaryColor,
+                  )),
+              Container(
+                  padding: EdgeInsets.all(5),
+                  child: Text(
+                    'Location',
+                    style: TextStyle(
+                        color: greenieTheme.bgColor,
+                        fontFamily: greenieTheme.fontFamily),
+                  ),
+                  decoration: BoxDecoration(
+                    color: greenieTheme.primaryColor,
+                  )),
+            ],
+          )
         ],
       ),
     );
   }
+
 /*
   Widget _buildFeedBlock(int index) {
     Map article = articles[index];
