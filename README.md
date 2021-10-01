@@ -35,7 +35,11 @@ A platform that builds a <b>community</b> among people and industries towards th
 </ol>
 
 ## Walk-through
-<a href =  "https://drive.google.com/file/d/1OMIeigmSOdvOtrOeqMtIUBuYzX_fVE31/view?usp=sharing">Demo</a>
+<ul>
+<li><a href =  "https://drive.google.com/file/d/1OMIeigmSOdvOtrOeqMtIUBuYzX_fVE31/view?usp=sharing">Prototype</a></li>
+<li><a href = "https://drive.google.com/file/d/1Klce4nNWOV84SpL8lP3ds8jF6GsRuxaz/view?usp=sharing">Small Demo</a></li>
+<li><a href = "https://drive.google.com/file/d/1IvCHPXlKiKG5ZqgszdediAtMKmXUTuP5/view?usp=sharing">Presentation</a></li>
+</ul>
 
 ## Technologies used
 <ul>
