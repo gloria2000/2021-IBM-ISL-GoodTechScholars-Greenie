@@ -1,3 +1,5 @@
+![](https://github.com/gloria2000/2021-IBM-ISL-GoodTechScholars-Greenie/blob/main/assets/logo.png)
+
 # Greenie
 
 A platform that builds a <b>community</b> among people and industries towards the attainment of sustainable development goals. Other than that it would aim to provide a standard to the industries by assigning a <b>greenie value</b>, which would denote the contribution of the industry in protecting the environment.
@@ -22,7 +24,6 @@ A platform that builds a <b>community</b> among people and industries towards th
     <li>Maintain the greenie value that denotes their contribution</li>
     <li>Can share and advertise their green profile</li>
     <li>Organize events and campaigns</li>
-    <li></li>
   </ul>
   <li>Individuals</li>
   <ul>
@@ -32,6 +33,9 @@ A platform that builds a <b>community</b> among people and industries towards th
     <li>Learn about the industrial manufacturing process and become an informed consumer</li>
   </ul>
 </ol>
+
+## Walk-through
+<a href =  "https://drive.google.com/file/d/1OMIeigmSOdvOtrOeqMtIUBuYzX_fVE31/view?usp=sharing">Demo</a>
 
 ## Technologies used
 <ul>
