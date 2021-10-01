@@ -1,6 +1,45 @@
-# greenie
+# Greenie
 
-A new Flutter project.
+A platform that builds a <b>community</b> among people and industries towards the attainment of sustainable development goals. Other than that it would aim to provide a standard to the industries by assigning a <b>greenie value</b>, which would denote the contribution of the industry in protecting the environment.
+
+## Contributors
+1. <a href =  "http://github.com/gloria2000">Gloria Thomas</a>, RIT Kottayam
+2. <a href =  "http://github.com/jishadennis">Jisha Dennis</a>, RIT Kottayam
+3. <a href =  "http://github.com/samsunny16">Sam Sunny</a>, RIT Kottayam
+4. <a href =  "http://github.com/ShivaniSSS">Shivani S</a>, RIT Kottayam
+
+## Problem Statement
+  World is facing adverse affects of climate change caused due to the industrial activities and our reliance on them. People are still unaware or ignorant of the condition and its possible affects in the future. But many of the industries are not taking up the responsibility towards responding to the present condition. It is high time that there should be transparency in the methods adopted by the industry for the manufacture of products to promote informed consumption by the public.
+  Individual consumer choices are a small contributor to climate change. That doesn't mean they don't matter. But as individuals, most of us are not aware of the potential we have to bring about the change we need right now.
+  
+## Personas of the System
+
+<ol>
+  <li>Industries</li>
+  <ul>
+    <li>Bring transparency in the manfacturing process</li>
+    <li>Keep track of their contribution through weekly reports and greenie points</li>
+    <li>Maintain the greenie value that denotes their contribution</li>
+    <li>Can share and advertise their green profile</li>
+    <li>Organize events and campaigns</li>
+    <li></li>
+  </ul>
+  <li>Individuals</li>
+  <ul>
+    <li>Organize events for awareness</li>
+    <li>Share and learn from community</li>
+    <li>Keep track of their contribution through greenie points</li>
+    <li>Learn about the industrial manufacturing process and become an informed consumer</li>
+  </ul>
+</ol>
+
+## Technologies used
+<ul>
+  <li>Flutter framework</li>
+  <li>Firebase</li>
+  <li>Cloud Firestore Database</li>
+</ul>
+    
 
 ## Getting Started
 
