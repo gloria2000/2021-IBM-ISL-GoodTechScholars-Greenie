@@ -48,6 +48,11 @@ A platform that builds a <b>community</b> among people and industries towards th
   <li>Cloud Firestore Database</li>
 </ul>
     
+## Screenshots
+![](https://github.com/gloria2000/2021-IBM-ISL-GoodTechScholars-Greenie/blob/main/screenshots/feed.jpeg)
+![](https://github.com/gloria2000/2021-IBM-ISL-GoodTechScholars-Greenie/blob/main/screenshots/login.png)
+![](https://github.com/gloria2000/2021-IBM-ISL-GoodTechScholars-Greenie/blob/main/screenshots/event.png)
+![](https://github.com/gloria2000/2021-IBM-ISL-GoodTechScholars-Greenie/blob/main/screenshots/firebase.jpeg)
 
 ## Getting Started
 
